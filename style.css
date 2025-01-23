@@ -4,6 +4,8 @@
     --color-tertiary: #C4C4C4;
     --color-button: #fe652b;
     --color-button-hover: #e55720;
+    --color-button-reset: #526dc5;
+    --color-button-reset-hover: #5b4c92;
     --color-text: #444444;
     --color-white: #FFFFFF;
 }
@@ -159,4 +161,20 @@ ul {
 
 .button-draw:hover {
     background-color: var(--color-button-hover);
+}
+
+.button-reset {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 40px;
+    background-color: var(--color-button-reset);
+    color: var(--color-text);
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+
+.button-reset:hover {
+    background-color: var(--color-button-reset-hover)
 }
