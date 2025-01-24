@@ -1,15 +1,19 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
-//alert("bienenido a mi desaio");
-//primer
+alert("¡Bienvenido a mi desafío!");
+
+// Inicialización de la lista de amigos
 let amigos = [];
 
+// Función para agregar amigos
 function agregarAmigo() {
   const input = document.getElementById("amigo");
   const nombre = input.value.trim();
 
-  // Validación más robusta (solo letras y espacios)
-  if (!/^[a-zA-Z\s]+$/.test(nombre)) {
-    alert("Por favor, ingresa un nombre válido (solo letras y espacios).");
+  // Validación que permite letras, espacios, acentos y la letra "ñ"
+  if (!/^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombre)) {
+    alert(
+      "Por favor, ingresa un nombre válido (solo letras, espacios y acentos)."
+    );
     return;
   }
 
@@ -20,7 +24,7 @@ function agregarAmigo() {
     return;
   }
 
-  // Si se pasa ambas validaciones, agregar el amigo y mostrar mensaje de éxito
+  // Agregar amigo si pasa las validaciones
   amigos.push(nombre);
   alert("Amigo agregado correctamente.");
 
@@ -31,6 +35,7 @@ function agregarAmigo() {
   console.log(amigos);
 }
 
+// Función para actualizar la lista visible
 function actualizarListaDeAmigos() {
   const lista = document.getElementById("listaAmigos");
   lista.innerHTML = "";
@@ -40,9 +45,12 @@ function actualizarListaDeAmigos() {
     li.textContent = `${index + 1}. ${amigo}`;
     lista.appendChild(li);
   });
+
+  // Habilitar el botón de sortear si hay amigos en la lista
+  document.getElementById("botonSortear").disabled = amigos.length === 0;
 }
 
-//Función para sortear un amigo secreto
+// Función para sortear un amigo secreto (solo una vez)
 function sortearAmigo() {
   if (amigos.length === 0) {
     alert(
@@ -51,10 +59,18 @@ function sortearAmigo() {
     return;
   }
 
+  // Generar un índice aleatorio
   const indiceAleatorio = Math.floor(Math.random() * amigos.length);
   const amigoSecreto = amigos[indiceAleatorio];
 
   mostrarResultado(amigoSecreto);
+
+  // Deshabilitar el botón después de sortear
+  const botonSortear = document.getElementById("botonSortear");
+  botonSortear.disabled = true;
+  alert(
+    "El sorteo se ha realizado. Para reiniciar, haz clic en 'Reiniciar juego'."
+  );
 }
 
 // Función para mostrar el resultado del sorteo
@@ -67,6 +83,7 @@ function mostrarResultado(amigoSecreto) {
   resultado.appendChild(li);
 }
 
+// Función para reiniciar el juego
 function reiniciarJuego() {
   amigos = []; // Vaciar la lista de amigos
   localStorage.removeItem("amigos"); // Borrar datos del almacenamiento local
@@ -75,5 +92,17 @@ function reiniciarJuego() {
   document.getElementById("listaAmigos").innerHTML = "";
   document.getElementById("resultado").innerHTML = "";
 
+  // Habilitar el botón de sortear
+  document.getElementById("botonSortear").disabled = true;
+
   alert("El juego ha sido reiniciado.");
 }
+
+// Cargar los amigos guardados en localStorage al cargar la página
+window.onload = () => {
+  const amigosGuardados = JSON.parse(localStorage.getItem("amigos"));
+  if (amigosGuardados) {
+    amigos = amigosGuardados;
+    actualizarListaDeAmigos();
+  }
+};

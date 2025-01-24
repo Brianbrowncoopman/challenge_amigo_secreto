@@ -90,8 +90,11 @@ body {
 }
 
 .button-container {
-    width: 300px;
+    display: flex;
     justify-content: center;
+    gap: 1rem; /* Espaciado entre botones */
+    margin-top: 20px;
+    width: 300px;
 }
 
 /* Estilos de entrada de texto */
@@ -144,19 +147,22 @@ ul {
     text-align: center;
 }
 
-/* Botón de sortear título */
-.button-draw {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 40px;
-    color: var(--color-white);
-    background-color: var(--color-button);
+/* Botones con íconos */
+.button-draw,
+.button-reset {
+    display: flex; /* Activa el modelo flex */
+    align-items: center; /* Centra verticalmente los elementos */
+    gap: 0.5rem; /* Espaciado entre la imagen y el texto */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 10px 20px; /* Espaciado interno */
     font-size: 16px;
+    border-radius: 25px; /* Bordes redondeados */
+    cursor: pointer;
 }
 
-.button-draw img {
-    margin-right: 40px;
+.button-draw {
+    background-color: var(--color-button);
+    color: var(--color-white);
 }
 
 .button-draw:hover {
@@ -164,17 +170,16 @@ ul {
 }
 
 .button-reset {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 40px;
     background-color: var(--color-button-reset);
-    color: var(--color-text);
-    border-radius: 25px;
-    font-size: 16px;
+    color: var(--color-white);
 }
 
-
 .button-reset:hover {
-    background-color: var(--color-button-reset-hover)
+    background-color: var(--color-button-reset-hover);
+}
+
+.button-draw img,
+.button-reset img {
+    width: 20px; /* Tamaño de la imagen */
+    height: 20px; /* Proporción cuadrada */
 }
