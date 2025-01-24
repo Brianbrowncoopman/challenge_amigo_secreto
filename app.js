@@ -51,6 +51,28 @@ function actualizarListaDeAmigos() {
 }
 
 // Función para sortear un amigo secreto (solo una vez)
+//function sortearAmigo() {
+//if (amigos.length === 0) {
+//alert(
+//"La lista de amigos está vacía. ¡Agrega al menos un nombre antes de sortear!"
+//);
+//return;
+//}
+
+// Generar un índice aleatorio
+//const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+//const amigoSecreto = amigos[indiceAleatorio];
+
+//mostrarResultado(amigoSecreto);
+
+// Deshabilitar el botón después de sortear
+//const botonSortear = document.getElementById("botonSortear");
+//botonSortear.disabled = true;
+//  alert(
+//    "El sorteo se ha realizado. Para reiniciar, haz clic en 'Reiniciar juego'."
+//  );
+//}
+
 function sortearAmigo() {
   if (amigos.length === 0) {
     alert(
@@ -59,18 +81,30 @@ function sortearAmigo() {
     return;
   }
 
-  // Generar un índice aleatorio
-  const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-  const amigoSecreto = amigos[indiceAleatorio];
+  // Mostrar el spinner
+  const tombola = document.getElementById("tombola");
+  tombola.classList.remove("hidden");
 
-  mostrarResultado(amigoSecreto);
+  // Simular el tiempo del sorteo (por ejemplo, 3 segundos)
+  setTimeout(() => {
+    // Generar un índice aleatorio
+    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+    const amigoSecreto = amigos[indiceAleatorio];
 
-  // Deshabilitar el botón después de sortear
-  const botonSortear = document.getElementById("botonSortear");
-  botonSortear.disabled = true;
-  alert(
-    "El sorteo se ha realizado. Para reiniciar, haz clic en 'Reiniciar juego'."
-  );
+    // Mostrar el resultado
+    mostrarResultado(amigoSecreto);
+
+    // Ocultar el spinner
+    tombola.classList.add("hidden");
+
+    // Deshabilitar el botón después de sortear
+    const botonSortear = document.getElementById("botonSortear");
+    botonSortear.disabled = true;
+
+    alert(
+      "El sorteo se ha realizado. Para reiniciar, haz clic en 'Reiniciar juego'."
+    );
+  }, 3000); // 3000 ms = 3 segundos
 }
 
 // Función para mostrar el resultado del sorteo
